@@ -1,0 +1,41 @@
+*{
+    color: red;
+    margin: 0;
+    padding: 0;
+}
+.mainContainer{
+    width: 100vw;
+    height: 100vh;
+}
+.navBar{
+    width: 30%;
+    height: 100%;
+    background-color: aqua;
+}
+#openForm{
+    position: absolute;
+}
+.taskForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    height: 50vh;
+    width: 50vw;
+    /* to keep it like disabled */
+    opacity: 0;
+
+    background-color: antiquewhite;
+    padding: 3vw;
+    overflow: auto;
+    min-height: 150px;
+}
+.taskForm.enabled{
+    opacity: 1;
+}
+.taskForm.disabled{
+    opacity: 0;
+}

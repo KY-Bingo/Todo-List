@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Example</title>
+    <!-- <script src = "LP.js" defer></script> -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class = "mainContainer">
+        <button id = "openForm" onclick="document.querySelector('.taskForm').classList.remove('disabled');document.querySelector('.taskForm').classList.add('enabled');">Create Task</button>
+        <form class = "taskForm">
+            <h1>
+                Add a new Task!
+            </h1>
+            <div class = "formItem">
+                <label for = "nameBox">Book Name</label>
+                <input type = "text" id = "nameBox" placeholder = "Enter a book title">
+            </div>
+            <div class = "formItem">
+                <label for = "authorBox">Author</label>
+                <input type = "text" id = "authorBox" placeholder = "Enter a book title">
+            </div>
+            <div class = "formItem">
+                <label for = "dateBox">Date</label>
+                <input type = "text" id = "dateBox" placeholder = "Enter a book title">
+            </div>
+            <div class = "formItem">
+                <label for = "pageBox">Pages</label>
+                <input type = "text" id = "pageBox" placeholder = "Enter a book title">
+            </div>
+            <div class = "formItem">
+                <fieldset>
+                    <legend>Have you Read?</legend>
+                        <div>
+                            <label for = "true">Read</label>
+                            <input type = "radio" id = "true" name = "read" value = "true">
+                        </div>
+                        
+                        <div>
+                            <label for = "false">Not read</label>
+                            <input type = "radio" id = "false" name = "read" value = "false">
+                        </div>
+                </fieldset>
+            </div>
+            <button type = "button" id = "closeForm" onclick="document.querySelector('.taskForm').classList.add('enabled');document.querySelector('.taskForm').classList.add('disabled');">Cancel</button>
+            <button type = "submit" id = "submitBtn">Submit</button>
+        </form>
+        <div class = "navBar">
+            <!-- Holds the navigation buttons and all -->
+             
+        </div>
+        <div class = "contentContainer">
+            <!-- holds the tasks and content -->
+        </div>
+    </div>
+</body>
