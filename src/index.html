@@ -15,37 +15,56 @@
                 Add a new Task!
             </h1>
             <div class = "formItem">
-                <label for = "nameBox">Book Name</label>
+                <label for = "nameBox">Task Title</label>
                 <input type = "text" id = "nameBox" placeholder = "Enter a book title">
             </div>
             <div class = "formItem">
-                <label for = "authorBox">Author</label>
-                <input type = "text" id = "authorBox" placeholder = "Enter a book title">
+                <label for = "descBox">Description</label>
+                <input type = "text" id = "descBox" placeholder = "Enter a book title">
             </div>
             <div class = "formItem">
                 <label for = "dateBox">Date</label>
                 <input type = "text" id = "dateBox" placeholder = "Enter a book title">
             </div>
             <div class = "formItem">
-                <label for = "pageBox">Pages</label>
-                <input type = "text" id = "pageBox" placeholder = "Enter a book title">
-            </div>
-            <div class = "formItem">
+                <label for = "priorityBox">Priority</label>
+                <input type = "text" id = "prioityBox" placeholder = "Enter a book title">
+                <!-- represents the true or false thing -->
                 <fieldset>
-                    <legend>Have you Read?</legend>
+                    <legend>Priority Level</legend>
                         <div>
-                            <label for = "true">Read</label>
-                            <input type = "radio" id = "true" name = "read" value = "true">
+                            <label for = "low">Low</label>
+                            <input type = "radio" id = "low" name = "due" value = "low">
                         </div>
                         
                         <div>
-                            <label for = "false">Not read</label>
-                            <input type = "radio" id = "false" name = "read" value = "false">
+                            <label for = "medium">Medium</label>
+                            <input type = "radio" id = "medium" name = "due" value = "medium">
+                        </div>
+
+                        <div>
+                            <label for = "high">High</label>
+                            <input type = "radio" id = "high" name = "due" value = "high">
+                        </div>
+                </fieldset>
+            </div>
+            <div class = "formItem">
+                <!-- represents the true or false thing -->
+                <fieldset>
+                    <legend>Is it due?</legend>
+                        <div>
+                            <label for = "true">Yes</label>
+                            <input type = "radio" id = "true" name = "due" value = "true">
+                        </div>
+                        
+                        <div>
+                            <label for = "false">No</label>
+                            <input type = "radio" id = "false" name = "due" value = "false">
                         </div>
                 </fieldset>
             </div>
             <button type = "button" id = "closeForm" onclick="document.querySelector('.taskForm').classList.add('enabled');document.querySelector('.taskForm').classList.add('disabled');">Cancel</button>
-            <button type = "submit" id = "submitBtn">Submit</button>
+            <button type = "button" id = "submitBtn">Submit</button>
         </form>
         <div class = "navBar">
             <!-- Holds the navigation buttons and all -->
