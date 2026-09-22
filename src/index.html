@@ -27,24 +27,22 @@
                 <input type = "text" id = "dateBox" placeholder = "Enter a book title">
             </div>
             <div class = "formItem">
-                <label for = "priorityBox">Priority</label>
-                <input type = "text" id = "prioityBox" placeholder = "Enter a book title">
                 <!-- represents the true or false thing -->
                 <fieldset>
                     <legend>Priority Level</legend>
                         <div>
                             <label for = "low">Low</label>
-                            <input type = "radio" id = "low" name = "due" value = "low">
+                            <input type = "radio" id = "low" name = "priority" value = "low">
                         </div>
                         
                         <div>
                             <label for = "medium">Medium</label>
-                            <input type = "radio" id = "medium" name = "due" value = "medium">
+                            <input type = "radio" id = "medium" name = "priority" value = "medium">
                         </div>
 
                         <div>
                             <label for = "high">High</label>
-                            <input type = "radio" id = "high" name = "due" value = "high">
+                            <input type = "radio" id = "high" name = "priority" value = "high">
                         </div>
                 </fieldset>
             </div>
@@ -53,13 +51,13 @@
                 <fieldset>
                     <legend>Is it due?</legend>
                         <div>
-                            <label for = "true">Yes</label>
-                            <input type = "radio" id = "true" name = "due" value = "true">
+                            <label for = "due">Yes</label>
+                            <input type = "radio" id = "due" name = "isDue" value = "true">
                         </div>
                         
                         <div>
-                            <label for = "false">No</label>
-                            <input type = "radio" id = "false" name = "due" value = "false">
+                            <label for = "notDue">No</label>
+                            <input type = "radio" id = "notDue" name = "isDue" value = "false">
                         </div>
                 </fieldset>
             </div>

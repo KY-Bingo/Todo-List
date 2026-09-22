@@ -25,28 +25,45 @@ function Task(name, desc, priority, date, isDue){
 const eat = new Task("gary", "Hi I am gary", "high", "something", true);
 console.log(eat);
 
+function getPriorityValue(){
+    const selectedRadio = document.querySelector('input[name = "prioirty"]:checked')
+
+    return selectedRadio ? selectedRadio.value : "low";
+    // 
+}
+
 function addTaskToDatabase(){
     const name = document.getElementById('nameBox').value;
     const description = document.getElementById('descBox').value;
-    const priority = document.getElementById('priorityBox').value;
+    const priority = getPriorityValue();
     // The idea for prioity is that we want the form to have three options being low medium and high. Similar to the radio with true and false
     // Make the javascipt tend to teh 3 options.
-    const date = document.getElementsByID('dateBox').value 
-    const isDue = document.querySelector('#true').checked; 
+    const date = document.getElementById('dateBox').value;
+    const isDue = document.querySelector('#due').checked; 
+    // due is true and not due is false
     // setup the function to set up teh database/
 
+    const newTask = new Task(name, description, priority, date, isDue)
+    data.push(newTask);
+    console.log(data);
 }
-function addTask(){
+function createTask(){
     const taskContainer = document.createElement('div');
     taskContainer.classList.add('taskContainer');
     taskContainer.style.backgroundColor = 'red';
 
     contentContainer.appendChild(taskContainer);
+    data.forEach((task) => {
+        const taskName = document.createElement('h2');
+        taskName.textContent = task.name;
+        taskContainer.appendChild(taskName);
+    });
 }
 const createTaskBtn = document.querySelector('#submitBtn');
 
 createTaskBtn.addEventListener('click',(e) =>{
     e.preventDefault();
     console.log('hit');
-    addTask();
+    createTask();
+    addTaskToDatabase();
 })
