@@ -9,9 +9,6 @@
 import "./style.css";
 
 let data = [];
-const contentContainer = document.querySelector('.contentContainer');
-
-
 
 function Task(name, desc, priority, date, isDue){
     this.name = name;
@@ -26,7 +23,7 @@ const eat = new Task("gary", "Hi I am gary", "high", "something", true);
 console.log(eat);
 
 function getPriorityValue(){
-    const selectedRadio = document.querySelector('input[name = "prioirty"]:checked')
+    const selectedRadio = document.querySelector('input[name = "priority"]:checked')
 
     return selectedRadio ? selectedRadio.value : "low";
     // 
@@ -45,25 +42,52 @@ function addTaskToDatabase(){
 
     const newTask = new Task(name, description, priority, date, isDue)
     data.push(newTask);
+
+    createTask();
     console.log(data);
 }
 function createTask(){
-    const taskContainer = document.createElement('div');
-    taskContainer.classList.add('taskContainer');
-    taskContainer.style.backgroundColor = 'red';
+    const contentContainer = document.querySelector('.contentContainer');
+    contentContainer.innerHTML = '';
 
-    contentContainer.appendChild(taskContainer);
-    data.forEach((task) => {
+
+    data.forEach((task, index) => {
+        const taskContainer = document.createElement('div');
+        taskContainer.classList.add('taskContainer');
+        taskContainer.style.backgroundColor = 'red';
+
         const taskName = document.createElement('h2');
         taskName.textContent = task.name;
+
+        const taskDesc = document.createElement('div');
+        taskDesc.textContent = task.desc;
+
+        const taskPriority = document.createElement('div');
+        taskPriority.textContent = `Priority:${task.priority}`;
+        
+        const taskDate = document.createElement('div');
+        taskDate.textContent = `Due date: ${task.date}`;
+
+        const taskIsDue = document.createElement('div');
+        taskIsDue.textContent = `Status: ${task.isDue}`;
+
+        // creating the task container
+        contentContainer.appendChild(taskContainer);
+
+        // Appending within task container
         taskContainer.appendChild(taskName);
-    });
+        taskContainer.appendChild(taskDesc);
+        taskContainer.appendChild(taskDate);
+        taskContainer.appendChild(taskPriority);
+        taskContainer.appendChild(taskIsDue);
+
+    })
 }
 const createTaskBtn = document.querySelector('#submitBtn');
 
 createTaskBtn.addEventListener('click',(e) =>{
     e.preventDefault();
     console.log('hit');
-    createTask();
+    
     addTaskToDatabase();
 })
