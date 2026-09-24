@@ -9,6 +9,7 @@
 </head>
 <body>
     <div class = "mainContainer">
+        <button id = "expandBtn" onclick="document.querySelector('.mainContainer').classList.toggle('show');"></button>
         <button id = "openForm" onclick="document.querySelector('.taskForm').classList.remove('disabled');document.querySelector('.taskForm').classList.add('enabled');">Create Task</button>
         <form class = "taskForm">
             <h1>
@@ -64,9 +65,9 @@
             <button type = "button" id = "closeForm" onclick="document.querySelector('.taskForm').classList.add('enabled');document.querySelector('.taskForm').classList.add('disabled');">Cancel</button>
             <button type = "button" id = "submitBtn">Submit</button>
         </form>
+        <!-- class toggle works -->
         <div class = "navBar">
             <!-- Holds the navigation buttons and all -->
-             
         </div>
         <div class = "contentContainer">
             <!-- holds the tasks and content -->

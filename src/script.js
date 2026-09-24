@@ -54,8 +54,7 @@ function createTask(){
     data.forEach((task, index) => {
         const taskContainer = document.createElement('div');
         taskContainer.classList.add('taskContainer');
-        taskContainer.style.backgroundColor = 'red';
-
+        
         const taskName = document.createElement('h2');
         taskName.textContent = task.name;
 
