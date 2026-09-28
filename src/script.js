@@ -61,7 +61,8 @@ function Task(name, desc, priority, isDue, daysLeft){
     this.endDate = [dueWeekday, dueMonth, dueDay, dueYear];
     this.dueToday = false
     this.upcoming = true;
-    this.overDue = true;
+    this.overDue = false;
+    this.id = crypto.randomUUID();
 
     if(dayDiff < 0){
         this.upcoming = false;
@@ -100,16 +101,21 @@ function addTaskToDatabase(){
     // due is true and not due is false
     // setup the function to set up teh database/
 
-    const newTask = new Task(name, description, priority, isDue, daysForGoal)
+    let newTask = new Task(name, description, priority, isDue, daysForGoal)
     data.push(newTask);
     
     createTask();
     console.log(data);
 }
+
+function removeTask(id){
+    data = data.filter(task => task.id !== id);
+}
+
 function createTask(){
     const contentContainer = document.querySelector('.contentContainer');
     contentContainer.innerHTML = '';
-
+    console.log(data);
 
     data.forEach((task, index) => {
         const taskContainer = document.createElement('div');
@@ -128,7 +134,7 @@ function createTask(){
         taskDesc.textContent = task.desc;
 
         const taskPriority = document.createElement('div');
-        taskPriority.textContent = `Priority:${task.priority}`;
+        taskPriority.textContent = `Priority: ${task.priority}`;
         
         const taskStartDate = document.createElement('div');
         taskStartDate.textContent = `Start Date: ${task.date[0]}, ${task.date[1]} ${task.date[2]}, ${task.date[3]}`;
@@ -138,6 +144,32 @@ function createTask(){
 
         const taskIsDue = document.createElement('div');
         taskIsDue.textContent = `Status: ${task.isDue}`;
+
+        const buttonDiv = document.createElement('div');
+        const deleteBtn = document.createElement('button');
+        deleteBtn.style.width = '100px';
+        deleteBtn.style.height = '20px';
+        deleteBtn.textContent = 'Delete'
+        const editBtn = document.createElement('button');
+        editBtn.style.width = '100px';
+        editBtn.style.height = '20px';
+        editBtn.textContent = 'Edit';
+
+        if(task.priority == "low"){
+            taskPriority.style.color = 'green';
+        }else if(task.priority == "medium"){
+            taskPriority.style.color = 'yellow';
+        }else if(task.priority == "high"){
+            taskPriority.style.color = 'red';
+        }
+
+        deleteBtn.addEventListener('click', () =>{
+            removeTask(task.id);
+            createTask();
+        })
+        editBtn.addEventListener('click', () =>{
+
+        })
 
         // creating the task container
         contentContainer.appendChild(taskContainer);
@@ -149,6 +181,10 @@ function createTask(){
         taskContainer.appendChild(taskEndDate)
         taskContainer.appendChild(taskPriority);
         taskContainer.appendChild(taskIsDue);
+
+        taskContainer.appendChild(buttonDiv);
+        buttonDiv.append(deleteBtn, editBtn);
+
 
     })
 }
