@@ -9,6 +9,7 @@
 import "./style.css";
 
 let data = [];
+let editingTaskId = null;
 
 
 
@@ -62,21 +63,19 @@ function Task(name, desc, priority, isDue, daysLeft){
     this.dueToday = false
     this.upcoming = true;
     this.overDue = false;
+    this.dueInWeek = false;
     this.id = crypto.randomUUID();
 
     if(dayDiff < 0){
         this.upcoming = false;
         this.overDue = true;
     }
-    else if(dayDiff = 0){
+    else if(dayDiff === 0){
         this.dueToday = true
     }
     else if(dayDiff>=1){
         this.dueInWeek = true
     }
-
-    // if (currentDate.getDate())
-    // this.isDueNextWeek = 
 }
 
 const eat = new Task("gary", "Hi I am gary", "high", "something", true);
@@ -98,14 +97,56 @@ function addTaskToDatabase(){
 
     const isDue = document.querySelector('#due').checked; 
 
-    // due is true and not due is false
-    // setup the function to set up teh database/
+    const taskValues = [name, description, priority, isDue, daysForGoal];
+    // acts as a placeholder so that it can use the parameters of the constructor task values
 
-    let newTask = new Task(name, description, priority, isDue, daysForGoal)
-    data.push(newTask);
-    
+    if(editingTaskId){
+        const taskIndex = data.findIndex(task => task.id === editingTaskId)
+        // we set editing task id to the one we click edit for afterwards.
+        const originalTask = data[taskIndex];
+        const updatedTask = new Task(...taskValues);
+        updatedTask.id = originalTask.id;
+        updatedTask.date = originalTask.date;
+        data[taskIndex] = updatedTask;
+    }else{
+        data.push(new Task(...taskValues));
+    }
+    resetTaskForm();
+    hideTaskForm();
     createTask();
     console.log(data);
+}
+
+function resetTaskForm(){
+    editingTaskId = null;
+    document.querySelector('.taskForm').reset();
+    document.querySelector('#formTitle').textContent = 'Add a new Task!';
+    document.querySelector('#submitBtn').textContent = 'Submit';
+}
+
+function showTaskForm(){
+    const taskForm = document.querySelector('.taskForm');
+    taskForm.classList.remove('disabled');
+    taskForm.classList.add('enabled');
+}
+
+function hideTaskForm(){
+    const taskForm = document.querySelector('.taskForm');
+    taskForm.classList.remove('enabled');
+    taskForm.classList.add('disabled');
+}
+
+function editTask(task){
+    editingTaskId = task.id;
+    document.querySelector('#nameBox').value = task.name;
+    document.querySelector('#descBox').value = task.desc;
+    document.querySelector('#daysBox').value = task.daysLeft;
+    document.querySelector(`input[name="priority"][value="${task.priority}"]`).checked = true;
+    document.querySelector('#due').checked = task.isDue;
+    document.querySelector('#notDue').checked = !task.isDue;
+    document.querySelector('#formTitle').textContent = 'Edit Task';
+    document.querySelector('#submitBtn').textContent = 'Save Changes';
+    showTaskForm();
 }
 
 function removeTask(id){
@@ -163,28 +204,21 @@ function createTask(){
             taskPriority.style.color = 'red';
         }
 
+        
+        // creating the task container
+        contentContainer.appendChild(taskContainer);
+        taskContainer.append(taskName, taskDesc, taskStartDate, taskEndDate, taskPriority, taskIsDue)
+
+        taskContainer.appendChild(buttonDiv);
+        buttonDiv.append(deleteBtn, editBtn);
+
         deleteBtn.addEventListener('click', () =>{
             removeTask(task.id);
             createTask();
         })
         editBtn.addEventListener('click', () =>{
-
+            editTask(task);
         })
-
-        // creating the task container
-        contentContainer.appendChild(taskContainer);
-
-        // Appending within task container
-        taskContainer.appendChild(taskName);
-        taskContainer.appendChild(taskDesc);
-        taskContainer.appendChild(taskStartDate);
-        taskContainer.appendChild(taskEndDate)
-        taskContainer.appendChild(taskPriority);
-        taskContainer.appendChild(taskIsDue);
-
-        taskContainer.appendChild(buttonDiv);
-        buttonDiv.append(deleteBtn, editBtn);
-
 
     })
 }
@@ -196,6 +230,16 @@ createTaskBtn.addEventListener('click',(e) =>{
     
     addTaskToDatabase();
 })
+
+document.querySelector('#openForm').addEventListener('click', () =>{
+    resetTaskForm();
+    showTaskForm();
+});
+
+document.querySelector('#closeForm').addEventListener('click', () =>{
+    resetTaskForm();
+    hideTaskForm();
+});
 
 
 
